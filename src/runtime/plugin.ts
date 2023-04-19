@@ -15,8 +15,8 @@ export default defineNuxtPlugin((nuxtApp) => {
   const requestCookies = (process.server && NuxtApollo.proxyCookies && useRequestHeaders(['cookie'])) || undefined
 
   const clients: { [key: string]: ApolloClient<any> } = {}
-
-  for (const [key, clientConfig] of Object.entries(NuxtApollo.clients)) {
+  const options = useRuntimeConfig().public.apollo
+  for (const [key, clientConfig] of Object.entries(options.clients)) {
     const getAuth = async () => {
       const token = ref<string | null>()
 

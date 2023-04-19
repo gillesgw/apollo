@@ -1,6 +1,16 @@
 export default defineNuxtConfig({
   modules: ['@nuxt/ui', '@nuxtjs/apollo'],
-
+  runtimeConfig: {
+    public: {
+      apollo: {
+        clients: {
+          todos: {
+            httpEndpoint: 'https://nuxt-gql-server-2gl6xp7kua-ue.a.run.app/query',
+          }
+        }
+      }
+    }
+  },
   colorMode: {
     preference: 'light',
     storageKey: 'na-color-scheme'
@@ -14,7 +24,6 @@ export default defineNuxtConfig({
         tokenStorage: 'localStorage'
       },
       todos: {
-        httpEndpoint: 'https://nuxt-gql-server-2gl6xp7kua-ue.a.run.app/query',
         wsEndpoint: 'wss://nuxt-gql-server-2gl6xp7kua-ue.a.run.app/query',
         httpLinkOptions: {
           headers: {

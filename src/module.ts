@@ -38,7 +38,10 @@ export default defineNuxtModule<NuxtApolloConfig<any>>({
     },
     clientAwareness: false
   },
-  async setup (options, nuxt) {
+  async setup (baseOptions, nuxt) {
+
+    nuxt.options.runtimeConfig.public.apollo = defu(nuxt.options.runtimeConfig.public.apollo, baseOptions)
+    const options = nuxt.options.runtimeConfig.public.apollo
     if (!options.clients || !Object.keys(options.clients).length) {
       throw new Error('[@nuxtjs/apollo] Atleast one client must be configured.')
     }
@@ -86,6 +89,7 @@ export default defineNuxtModule<NuxtApolloConfig<any>>({
         }
 
         clients[k] = v
+        nuxt.options.runtimeConfig.public.apollo.clients[k] = v;
       }
     }
 
